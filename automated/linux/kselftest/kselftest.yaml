@@ -60,5 +60,6 @@ params:
 run:
     steps:
         - cd ./automated/linux/kselftest/
-        - ./kselftest.sh -c "${TST_CMDFILES}" -T "${TST_CASENAME}" -t "${TESTPROG}" -s "${SKIP_INSTALL}" -u "${TESTPROG_URL}" -L "${SKIPLIST}" -S "${SKIPFILE}" -b "${BOARD}" -g "${BRANCH}" -e "${ENVIRONMENT}" -p "${KSELFTEST_PATH}" -n "${SHARD_NUMBER}" -i "${SHARD_INDEX}"
+        - KSELFTEST_MAIN_SH_ARGS="-t suspend" ./kselftest.sh -c "${TST_CMDFILES}" -T "${TST_CASENAME}" -t "${TESTPROG}" -s "${SKIP_INSTALL}" -u "${TESTPROG_URL}" -L "${SKIPLIST}" -S "${SKIPFILE}" -b "${BOARD}" -g "${BRANCH}" -e "${ENVIRONMENT}" -p "${KSELFTEST_PATH}" -n "${SHARD_NUMBER}" -i "${SHARD_INDEX}"
+       # - ./kselftest.sh -c "${TST_CMDFILES}" -T "${TST_CASENAME}" -t "${TESTPROG}" -s "${SKIP_INSTALL}" -u "${TESTPROG_URL}" -L "${SKIPLIST}" -S "${SKIPFILE}" -b "${BOARD}" -g "${BRANCH}" -e "${ENVIRONMENT}" -p "${KSELFTEST_PATH}" -n "${SHARD_NUMBER}" -i "${SHARD_INDEX}"
         - ../../utils/send-to-lava.sh ./output/result.txt
