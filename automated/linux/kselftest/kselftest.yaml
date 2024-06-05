@@ -50,6 +50,15 @@ params:
     BOARD: ""
     BRANCH: ""
     ENVIRONMENT: ""
+    # Set an arbitrary environment variable like so ENV_VAR=ENV_VAL.
+    # Since the parsing assumes only one variable per `-E` option, we can only set
+    # one variable here.
+    #
+    # If multiple variable needs to be set, it might be a good idea to edit the test
+    # definition and add more -E directly in the invocation. The kselftest.sh script
+    # supports setting an arbitrary number of variables, just use
+    # `-E ENV_1_NAME=ENV_1_VAL -E ENV_2_NAME=ENV_2_VAL ...`.
+    ENV: ""
 
     # Number of shards that will be done, default 1 which is the same as no sharding.
     SHARD_NUMBER: 1
@@ -60,5 +69,5 @@ params:
 run:
     steps:
         - cd ./automated/linux/kselftest/
-        - ./kselftest.sh -c "${TST_CMDFILES}" -T "${TST_CASENAME}" -t "${TESTPROG}" -s "${SKIP_INSTALL}" -u "${TESTPROG_URL}" -L "${SKIPLIST}" -S "${SKIPFILE}" -b "${BOARD}" -g "${BRANCH}" -e "${ENVIRONMENT}" -p "${KSELFTEST_PATH}" -n "${SHARD_NUMBER}" -i "${SHARD_INDEX}"
+        - ./kselftest.sh -c "${TST_CMDFILES}" -T "${TST_CASENAME}" -t "${TESTPROG}" -s "${SKIP_INSTALL}" -u "${TESTPROG_URL}" -L "${SKIPLIST}" -S "${SKIPFILE}" -b "${BOARD}" -g "${BRANCH}" -e "${ENVIRONMENT}" -p "${KSELFTEST_PATH}" -n "${SHARD_NUMBER}" -i "${SHARD_INDEX}" -E "${ENV}"
         - ../../utils/send-to-lava.sh ./output/result.txt
