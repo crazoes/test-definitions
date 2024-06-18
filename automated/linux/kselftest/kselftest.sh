@@ -110,16 +110,8 @@ while getopts "i:n:c:T:t:s:u:p:L:S:b:g:e:E:h" opt; do
             ;;
         E)
             if [ -n "${OPTARG}" ]; then
-                 IFS='=' read -r env_name env_val << EOF
-${OPTARG}
-EOF
-                if [ -z "${env_name}" ] || [ -z "${env_val}" ]; then
-                    echo "Option -E requires an argument of format ENV_NAME=ENV_VAL"
-                    exit 1
-                fi
-                # Use eval to set an environment variable dynamically
-                eval "export ${env_name}=${env_val}"
-                eval "echo \"${env_name}='\$${env_name}'\""
+                echo "executing 'eval ${OPTARG}'"
+                eval "export ${OPTARG}"
             fi
             ;;
         h|*) usage ;;
