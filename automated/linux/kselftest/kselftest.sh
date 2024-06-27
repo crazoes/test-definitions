@@ -163,7 +163,7 @@ else
     # Fetch whatever we have been aimed at, assuming only that it can
     # be handled by "tar". Do not assume anything about the compression.
     wget "${TESTPROG_URL}" -O "${TESTPROG}"
-    tar -xaf "${TESTPROG}"
+    tar -xaf "${TESTPROG}" --strip-components=1
     # shellcheck disable=SC3044
     if [ ! -e "run_kselftest.sh" ]; then cd "kselftest" || exit; fi
 fi
